@@ -1,0 +1,640 @@
+body{
+  padding:0;
+  background:#000;
+}
+
+/* STATUS */
+
+.jc-status-bar{
+  position:fixed;
+  top:16px;
+  right:16px;
+  z-index:999;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  background:rgba(15,15,15,.85);
+  backdrop-filter:blur(12px);
+
+  border:1px solid #2a2a2a;
+  border-radius:50px;
+
+  padding:10px 16px;
+
+  box-shadow:0 0 20px rgba(255,255,255,.05);
+}
+
+.jc-status-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#fff;
+
+  animation:statusPulse 1.4s infinite;
+}
+
+@keyframes statusPulse{
+  0%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  50%{
+    opacity:.3;
+    transform:scale(1.4);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+
+.admin-panel{
+  display:none;
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  z-index:9999;
+
+  background:#111;
+  border:1px solid #333;
+  border-radius:20px;
+  padding:12px;
+
+  flex-direction:column;
+  gap:10px;
+}
+
+.admin-panel button{
+  margin:0;
+}
+
+.admin-panel{
+  display:none;
+}
+
+
+
+/* HERO */
+
+.hero-content{
+  position:relative;
+  z-index:2;
+
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  padding:20px;
+}
+
+.hero-logo{
+  width:120px;
+  margin-bottom:15px;
+}
+
+.hero h1{
+  font-size:2.8rem;
+  line-height:1;
+  margin:0;
+  font-weight:900;
+  letter-spacing:-1px;
+  text-transform:uppercase;
+}
+
+.hero p{
+  max-width:300px;
+  margin:14px auto 24px;
+  color:#c0c0c0;
+  font-size:15px;
+}
+
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+  background:#000;
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.28;
+  animation:heroZoom 15s linear infinite alternate;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(
+    circle at center,
+    rgba(255,255,255,.03),
+    rgba(0,0,0,.85)
+  );
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+}
+
+.hero-logo{
+  width:min(90vw, 520px);
+  height:auto;
+
+  filter:
+  drop-shadow(0 0 25px rgba(255,255,255,.08));
+
+  animation:floatLogo 5s ease-in-out infinite;
+}
+
+.hero-btn{
+  margin-top:35px;
+
+  background:#fff;
+  color:#000;
+
+  padding:16px 34px;
+
+  border-radius:999px;
+
+  font-weight:800;
+  letter-spacing:1px;
+
+  text-decoration:none;
+
+  transition:.3s;
+}
+
+.hero-btn:hover{
+  transform:translateY(-3px);
+}
+
+@keyframes floatLogo{
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
+
+}
+
+.hero-scroll{
+  position:absolute;
+  bottom:35px;
+
+  color:#777;
+
+  font-size:12px;
+  letter-spacing:4px;
+
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(8px);
+  }
+
+}
+
+
+/* GALLERY */
+
+.gallery-showcase{
+  padding:60px 20px;
+}
+
+.gallery-showcase h2{
+  font-size:32px;
+  margin-bottom:25px;
+}
+
+.gallery-scroll{
+  display:flex;
+  overflow-x:auto;
+  gap:15px;
+  scroll-snap-type:x mandatory;
+}
+
+.gallery-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+.gallery-card{
+  flex:0 0 85%;
+  aspect-ratio:9/16;
+
+  border-radius:24px;
+  overflow:hidden;
+
+  scroll-snap-align:start;
+}
+
+.floating-book-btn{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+
+  width:calc(100% - 30px);
+  max-width:500px;
+
+  text-align:center;
+
+  padding:16px;
+
+  background:#fff;
+  color:#000;
+
+  text-decoration:none;
+  font-weight:800;
+
+  border-radius:50px;
+
+  z-index:999;
+}
+
+.gallery-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* BOOKING FORM */
+
+.booking-form{
+  margin:20px;
+  background:#111;
+  border:1px solid #222;
+  border-radius:24px;
+  padding:25px;
+}
+
+/* STICKY BOOK BUTTON */
+
+.hero-btn,
+#bookBtn{
+  transition:.3s;
+}
+
+.hero-btn:hover,
+#bookBtn:hover{
+  transform:translateY(-3px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #0f0f0f;
+  color: #fff;
+  padding: 15px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+header h1 {
+  margin: 5px 0;
+}
+
+.card {
+  background: #1c1c1c;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+select,
+input,
+button {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+select,
+input {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+button {
+  background: #ffffff;
+  color: #000;
+  font-weight: bold;
+}
+
+.stats {
+  text-align: center;
+}
+
+#list {
+  list-style: none;
+  padding: 0;
+}
+
+#list li {
+  background: #222;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#list button {
+  width: auto;
+  padding: 6px 10px;
+  background: red;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+.footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.footer-socials {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer-socials a {
+  color: inherit;
+  font-size: 20px;
+}
+
+/* Leave a Review Section */
+#leave-review {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.review-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.review-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-family: 'Helvetica', Arial, sans-serif;
+}
+
+.review-text {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Google Review Button */
+.google-review-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff; /* Google-style white button */
+  color: #000;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2rem;
+  padding: 14px 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.google-review-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* SVG Icon */
+.google-btn-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .review-title {
+    font-size: 1.5rem;
+  }
+  .review-text {
+    font-size: 1rem;
+  }
+  .google-review-button {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+  .google-btn-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Fade in for all main sections */
+.section-padding {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+button, .google-review-button, .book-now-button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover, .google-review-button:hover, .book-now-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.time-dropdown {
+  background: #2a2a2a;
+  color: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #444;
+  appearance: none;
+}
+
+.time-dropdown option {
+  background: #1c1c1c;
+}
+
+.time-dropdown option:disabled {
+  color: #777;
+}
+
+/* PAYMENT SECTION */
+
+.payment-section {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.payment-card {
+  width: 100%;
+  max-width: 420px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255,255,255,0.04);
+}
+
+.payment-card h2 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.payment-text {
+  color: #999;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.price-box {
+  background: #181818;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 25px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.pay-btn {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #fff;
+  border-radius: 14px;
+
+  background: #fff;
+  color: #000;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pay-btn:hover {
+  background: #000;
+  color: #fff;
+  }
+
+.booking-heading{
+  text-align:center;
+  padding:50px 20px 20px;
+}
+
+.booking-heading span{
+  color:#888;
+  letter-spacing:3px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.booking-heading h2{
+  font-size:2rem;
+  margin:10px 0;
+}
+
+.booking-heading p{
+  color:#aaa;
+  max-width:320px;
+  margin:auto;
+}

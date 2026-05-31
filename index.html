@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barber Log</title>
+ <link rel="stylesheet" href="style.css">
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+
+</head>
+<body>
+
+ <div class="jc-status-bar">
+  <span class="jc-status-dot"></span>
+  <span id="jc-status-text">OPEN NOW</span>
+
+
+</div>
+<div id="adminPanel" class="admin-panel">
+<button id="openBtn">OPEN</button>
+<button id="closeBtn">CLOSED</button>
+</div>
+
+
+
+
+<div class="hero-content">
+
+  <img
+    src="images/jeff-cuts-logo-removebg-preview.png"
+    alt="Jeff Cuts"
+    class="hero-logo"
+  >
+
+  <a href="#booking" class="hero-btn">
+    BOOK NOW
+  </a>
+
+</div>
+<section class="gallery-showcase">
+
+  <h2>Latest Cuts</h2>
+
+  <div class="gallery-scroll">
+
+    <div class="gallery-card">
+      <img src="images/cut1.jpg">
+    </div>
+
+    <div class="gallery-card">
+      <img src="images/cut2.jpg">
+    </div>
+
+    <div class="gallery-card">
+      <img src="images/cut3.jpg">
+    </div>
+
+    <div class="gallery-card">
+      <img src="images/cut4.jpg">
+    </div>
+
+  </div>
+
+</section>
+
+<section class="booking-heading">
+
+  <span>BOOKING</span>
+
+  <h2>
+    Book Your Next Cut
+  </h2>
+
+  <p>
+    Choose your cut, date and time below. Closed on Sundays, Danko 💯
+  </p>
+
+</section>
+
+<section id="booking" class="booking-form">
+
+
+  <label for="category">Select Category</label>
+  <select id="category"></select>
+
+  <label for="service">Select Service</label>
+  <select id="service"></select>
+
+  <label for="price">Price</label>
+  <input type="number" id="price" readonly>
+
+  <label for="bookingDate">Select Date</label>
+  <input type="date" id="bookingDate">
+
+  <label for="bookingTime">Select Time</label>
+<select id="bookingTime" class="time-dropdown"></select>
+
+
+  <button id="addBtn">ADD CUT</button>
+  <button id="bookBtn">Book Appointment</button>
+</section>
+
+<section class="card stats">
+  <h2>Today</h2>
+  <p>Total: <strong id="total">R0</strong></p>
+  <p>Clients: <span id="count">0</span></p>
+</section>
+
+
+
+  
+  
+
+
+<ul id="list"></ul>
+  
+<!-- Leave a Google Review -->
+<section id="leave-review" class="section-padding">
+  <div class="review-container">
+    <h2 class="review-title">Love Your Cut? Leave a Review!</h2>
+    <p class="review-text">Click the button below to leave your review on Google.</p>
+    <a href="https://g.page/r/Cc5-m_rttCe4EBM/review" target="_blank" class="google-review-button">
+      <!-- Inline Google "G" Icon -->
+      <svg class="google-btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 533.5 544.3">
+        <path fill="#4285F4" d="M533.5 278.4c0-17.7-1.5-35.2-4.4-52H272v98.5h146.9c-6.4 34.4-25.2 63.6-53.8 83.1v68h86.9c50.8-46.8 80.5-115.6 80.5-197.6z"/>
+        <path fill="#34A853" d="M272 544.3c72.6 0 133.5-24 178-65.3l-86.9-68c-24.2 16.2-55.2 25.7-91.1 25.7-69.9 0-129.3-47.3-150.4-111.2h-89v69.8C83.4 481.5 169.3 544.3 272 544.3z"/>
+        <path fill="#FBBC05" d="M121.5 326.3c-5.1-15.2-8-31.5-8-48s2.9-32.8 8-48V160h-89C11.3 198.9 0 234.5 0 272s11.3 73.1 32.5 112l89-69.7z"/>
+        <path fill="#EA4335" d="M272 107.3c37.2-.6 70.6 13.6 96.9 39.9l72.8-72.8C404.6 27 345.6 0 272 0 169.3 0 83.4 62.8 32.5 160l89 69.8C142.7 154.6 202.1 107.3 272 107.3z"/>
+      </svg>
+      <span>Write a Google Review</span>
+    </a>
+  </div>
+</section>
+
+<!-- PAYMENT SECTION -->
+<section class="payment-section">
+  <div class="payment-card">
+
+    <h2>Complete Your Booking</h2>
+    <p class="payment-text">
+      Secure your cut instantly with online payment.
+    </p>
+
+    <!-- PAYFAST BUTTON -->
+    <form action="https://www.payfast.co.za/eng/process" method="post">
+
+      <!-- YOUR PAYFAST DETAILS -->
+      <input type="hidden" name="merchant_id" value="YOUR_MERCHANT_ID">
+      <input type="hidden" name="merchant_key" value="YOUR_MERCHANT_KEY">
+
+      <!-- CUSTOMER INFO -->
+      <input type="hidden" name="name_first" value="Client">
+      <input type="hidden" name="email_address" value="client@email.com">
+
+      <!-- PAYMENT DETAILS -->
+      <input type="hidden" name="amount" value="120.00">
+      <input type="hidden" name="item_name" value="Jeff Cuts Booking">
+
+      <button type="submit" class="pay-btn">
+        Proceed To Payment
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <p>© 2026 Jeff Cuts</p>
+
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/the_jeff_cut" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/Jeffery Jefferson="_blank">
+      <i class="fab fa-facebook"></i>
+    </a>
+     
+    <a href="https://wa.me/27671107595" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+                                
+  </div>
+</footer>
+
+<div class="hero-scroll">
+  
+</div>
+
+
+
+                                <script>
+const sections = document.querySelectorAll('.section-padding');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('section-visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+sections.forEach(section => observer.observe(section));
+</script>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
