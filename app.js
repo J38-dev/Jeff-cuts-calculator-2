@@ -352,7 +352,7 @@ if (logo && adminPanel && statusBarEl) {
 
 
 
-function updateDateTime() {
+function jeffCutsLiveClock() {
   const now = new Date();
 
   const dateOptions = {
@@ -368,12 +368,17 @@ function updateDateTime() {
     second: "2-digit"
   };
 
-  document.getElementById("liveDate").textContent =
-    now.toLocaleDateString("en-ZA", dateOptions);
+  const dateEl = document.getElementById("liveDate");
+  const timeEl = document.getElementById("liveTime");
 
-  document.getElementById("liveTime").textContent =
-    now.toLocaleTimeString("en-ZA", timeOptions);
+  if (dateEl) {
+    dateEl.textContent = now.toLocaleDateString("en-ZA", dateOptions);
+  }
+
+  if (timeEl) {
+    timeEl.textContent = now.toLocaleTimeString("en-ZA", timeOptions);
+  }
 }
 
-updateDateTime();
-setInterval(updateDateTime, 1000);
+jeffCutsLiveClock();
+setInterval(jeffCutsLiveClock, 1000);
