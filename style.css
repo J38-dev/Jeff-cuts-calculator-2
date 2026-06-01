@@ -635,7 +635,7 @@ button:hover, .google-review-button:hover, .book-now-button:hover {
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(12px);
 
-  border:1px solid rgba(255,255,255,0.15);
+  border:1px solid white;
   border-radius:18px;
 
   box-shadow:0 10px 30px rgba(0,0,0,0.25);
@@ -652,7 +652,7 @@ button:hover, .google-review-button:hover, .book-now-button:hover {
 #liveTime{
   font-size:2rem;
   font-weight:700;
-  color:#FFD700;
+  color: white;
   letter-spacing:2px;
-  text-shadow:0 0 15px rgba(255,215,0,0.5);
+  text-shadow:0 0 15px white;
 }
