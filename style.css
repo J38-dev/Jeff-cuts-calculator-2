@@ -625,34 +625,19 @@ button:hover, .google-review-button:hover, .book-now-button:hover {
 }
 
 .hero-datetime{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
-  margin:20px 0;
-  padding:14px 22px;
-
-  background:rgba(255,255,255,0.08);
-  backdrop-filter:blur(12px);
-
-  border:1px solid white;
-  border-radius:18px;
-
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
-}
-
-#liveDate{
-  font-size:0.95rem;
-  font-weight:500;
-  color:#fff;
-  letter-spacing:1px;
-  text-transform:uppercase;
+  text-align:center;
+  margin:18px 0;
 }
 
 #liveTime{
-  font-size:2rem;
-  font-weight:700;
-  color: white;
-  letter-spacing:2px;
-  text-shadow:0 0 15px white;
+  font-size:1.8rem;
+  font-weight:300;
+  color:#fff;
+  letter-spacing:1px;
+}
+
+#liveDate{
+  margin-top:4px;
+  color:#777;
+  font-size:0.85rem;
 }
