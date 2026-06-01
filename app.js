@@ -205,16 +205,7 @@ function render() {
 
 
 
-const bookingDateValue = document.getElementById("bookingDate").value;
 
-if (bookingDateValue) {
-  const bookingDay = new Date(bookingDateValue).getDay();
-
-  if (bookingDay === 0) {
-    alert("Jeff Cuts is closed on Sundays.");
-    return;
-  }
-}
 
 // ===============================
 // BOOKING
@@ -402,12 +393,4 @@ setInterval(jeffCutsLiveClock, 1000);
 
 
 
-document.getElementById("bookingDate")?.addEventListener("change", function () {
-  const selectedDay = new Date(this.value).getDay();
 
-  // Sunday = 0
-  if (selectedDay === 0) {
-    alert("Jeff Cuts is closed on Sundays. Please select another day.");
-    this.value = "";
-  }
-});
