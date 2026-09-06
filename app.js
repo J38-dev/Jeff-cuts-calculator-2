@@ -79,6 +79,62 @@ if (!categoryEl || !serviceEl || !addBtn) {
 }
 
 
+
+// ===============================
+// LIVE HERO DATE + TIME
+// ===============================
+
+const liveTimeEl = document.getElementById("liveTime");
+const liveDateEl = document.getElementById("liveDate");
+
+function updateLiveDateTime() {
+
+  const now = new Date();
+
+  // ===============================
+  // LIVE TIME
+  // ===============================
+
+  if (liveTimeEl) {
+
+    liveTimeEl.textContent =
+      now.toLocaleTimeString("en-ZA", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      });
+
+  }
+
+
+  // ===============================
+  // LIVE DATE
+  // ===============================
+
+  if (liveDateEl) {
+
+    liveDateEl.textContent =
+      now.toLocaleDateString("en-ZA", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
+  }
+
+}
+
+
+// Run immediately
+updateLiveDateTime();
+
+
+// Update every second
+setInterval(updateLiveDateTime, 1000);
+
+
 // ===============================
 // CUSTOMER CART STORAGE
 // ===============================
