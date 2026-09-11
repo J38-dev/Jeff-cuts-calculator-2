@@ -79,7 +79,6 @@ if (!categoryEl || !serviceEl || !addBtn) {
 }
 
 
-
 // ===============================
 // LIVE HERO DATE + TIME
 // ===============================
