@@ -342,6 +342,70 @@ async function loadTimeSlots() {
       available = true;
     }
 
+// ===============================
+// LOAD BOOKED TIMES FROM SUPABASE
+// ===============================
+
+async function loadTimeSlots() {
+
+  if (!bookingTimeEl) return;
+
+  bookingTimeEl.innerHTML = "";
+
+  const date = bookingDateEl?.value;
+
+  if (!date) {
+
+    bookingTimeEl.innerHTML =
+      '<option disabled selected>Select date first</option>';
+
+    return;
+  }
+
+
+  // Get all bookings for the selected date
+  const { data, error } = await supabaseClient
+    .from("bookings")
+    .select("booking_time")
+    .eq("booking_date", date);
+
+
+  // Database error
+  if (error) {
+
+    console.error("Could not load bookings:", error);
+
+    bookingTimeEl.innerHTML =
+      '<option disabled selected>Unable to load times</option>';
+
+    return;
+  }
+
+
+  // Create list of booked times
+  const bookedTimes = (data || []).map(
+    booking => String(booking.booking_time).substring(0, 5)
+  );
+
+
+  let available = false;
+
+
+  // Show only available times
+  timeSlots.forEach(time => {
+
+    if (!bookedTimes.includes(time)) {
+
+      const option = document.createElement("option");
+
+      option.value = time;
+      option.textContent = time;
+
+      bookingTimeEl.appendChild(option);
+
+      available = true;
+    }
+
   });
 
 
@@ -353,9 +417,7 @@ async function loadTimeSlots() {
 
   }
 
-    }
-
-                                          }
+}
 
 
 // Reload times whenever date changes
@@ -363,6 +425,9 @@ bookingDateEl?.addEventListener(
   "change",
   loadTimeSlots
 );
+
+                                          }
+
 
 
 // ===============================
