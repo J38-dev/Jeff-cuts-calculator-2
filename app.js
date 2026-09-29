@@ -309,7 +309,7 @@ async function loadTimeSlots() {
     );
 
     bookingTimeEl.innerHTML =
-      '<option disabled selected>Unable to load times</option>';
+  `<option disabled selected>${error.message}</option>`;
 
     return;
 
