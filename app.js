@@ -283,7 +283,7 @@ async function loadTimeSlots() {
 
   // Create list of booked times
   const bookedTimes = data.map(
-    booking => booking.booking_time
+    booking => String(booking.booking_time).substring(0, 5)
   );
 
 
@@ -316,7 +316,7 @@ async function loadTimeSlots() {
 
   }
 
-}
+                                          }
 
 
 // Reload times whenever date changes
