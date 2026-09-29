@@ -142,7 +142,7 @@ setInterval(updateLiveDateTime, 1000);
 // It only stores the customer's current services.
 // It does NOT store bookings.
 
-let entries = JSON.parse(localStorage.getItem("cuts")) || {};
+let entries = JSON.parse(localStorage.getItem("cuts")) || [];
 
 
 // ===============================
@@ -170,7 +170,8 @@ if (dateEl) {
 }
 
 if (bookingDateEl) {
-  bookingDateEl.min = new Date().toISOString().split("T")[0];
+  bookingDateEl.min =
+    new Date().toISOString().split("T")[0];
 }
 
 
@@ -179,18 +180,24 @@ if (bookingDateEl) {
 // ===============================
 
 function loadCategories() {
+
   if (!categoryEl) return;
 
   categoryEl.innerHTML = "";
 
   Object.keys(PRICING).forEach(cat => {
-    const option = document.createElement("option");
+
+    const option =
+      document.createElement("option");
 
     option.value = cat;
+
     option.textContent = cat;
 
     categoryEl.appendChild(option);
+
   });
+
 }
 
 
@@ -199,24 +206,31 @@ function loadCategories() {
 // ===============================
 
 function loadServices() {
+
   if (!categoryEl || !serviceEl) return;
 
   serviceEl.innerHTML = "";
 
-  const services = PRICING[categoryEl.value];
+  const services =
+    PRICING[categoryEl.value];
 
   if (!services) return;
 
   Object.keys(services).forEach(service => {
-    const option = document.createElement("option");
+
+    const option =
+      document.createElement("option");
 
     option.value = service;
+
     option.textContent = service;
 
     serviceEl.appendChild(option);
+
   });
 
   updatePrice();
+
 }
 
 
@@ -225,10 +239,12 @@ function loadServices() {
 // ===============================
 
 function updatePrice() {
+
   if (!priceEl) return;
 
   priceEl.value =
     PRICING?.[categoryEl?.value]?.[serviceEl?.value] ?? 0;
+
 }
 
 
@@ -236,9 +252,15 @@ function updatePrice() {
 // EVENTS
 // ===============================
 
-categoryEl?.addEventListener("change", loadServices);
+categoryEl?.addEventListener(
+  "change",
+  loadServices
+);
 
-serviceEl?.addEventListener("change", updatePrice);
+serviceEl?.addEventListener(
+  "change",
+  updatePrice
+);
 
 
 // ===============================
@@ -249,79 +271,60 @@ async function loadTimeSlots() {
 
   if (!bookingTimeEl) return;
 
+
+  // Clear current options
   bookingTimeEl.innerHTML = "";
 
-  const date = bookingDateEl?.value;
 
+  // Get selected date
+  const date =
+    bookingDateEl?.value;
+
+
+  // No date selected
   if (!date) {
 
     bookingTimeEl.innerHTML =
       '<option disabled selected>Select date first</option>';
 
     return;
+
   }
 
 
-  // Get all bookings for the selected date
-  const { data, error } = await supabaseClient
-    .from("bookings")
-    .select("booking_time")
-    .eq("booking_date", date);
+  // Get all bookings for selected date
+  const { data, error } =
+    await supabaseClient
+      .from("bookings")
+      .select("booking_time")
+      .eq("booking_date", date);
 
 
   // Database error
   if (error) {
 
-    console.error("Could not load bookings:", error);
+    console.error(
+      "Could not load bookings:",
+      error
+    );
 
     bookingTimeEl.innerHTML =
       '<option disabled selected>Unable to load times</option>';
 
     return;
+
   }
 
 
-  // Create list of booked times
-async function loadTimeSlots() {
-
-  if (!bookingTimeEl) return;
-
-  bookingTimeEl.innerHTML = "";
-
-  const date = bookingDateEl?.value;
-
-  if (!date) {
-
-    bookingTimeEl.innerHTML =
-      '<option disabled selected>Select date first</option>';
-
-    return;
-  }
-
-
-  // Get all bookings for the selected date
-  const { data, error } = await supabaseClient
-    .from("bookings")
-    .select("booking_time")
-    .eq("booking_date", date);
-
-
-  // Database error
-  if (error) {
-
-    console.error("Could not load bookings:", error);
-
-    bookingTimeEl.innerHTML =
-      '<option disabled selected>Unable to load times</option>';
-
-    return;
-  }
-
-
-  // Create list of booked times
-  const bookedTimes = data.map(
-    booking => String(booking.booking_time).substring(0, 5)
-  );
+  // Convert Supabase times such as
+  // 11:00:00 into 11:00
+  const bookedTimes =
+    (data || []).map(
+      booking =>
+        String(
+          booking.booking_time
+        ).substring(0, 5)
+    );
 
 
   let available = false;
@@ -332,125 +335,11 @@ async function loadTimeSlots() {
 
     if (!bookedTimes.includes(time)) {
 
-      const option = document.createElement("option");
+      const option =
+        document.createElement("option");
 
       option.value = time;
-      option.textContent = time;
 
-      bookingTimeEl.appendChild(option);
-
-      available = true;
-    }
-
-// ===============================
-// LOAD BOOKED TIMES FROM SUPABASE
-// ===============================
-
-async function loadTimeSlots() {
-
-  if (!bookingTimeEl) return;
-
-  bookingTimeEl.innerHTML = "";
-
-  const date = bookingDateEl?.value;
-
-  if (!date) {
-
-    bookingTimeEl.innerHTML =
-      '<option disabled selected>Select date first</option>';
-
-    return;
-  }
-
-
-  // Get all bookings for the selected date
-  const { data, error } = await supabaseClient
-    .from("bookings")
-    .select("booking_time")
-    .eq("booking_date", date);
-
-
-  // Database error
-  if (error) {
-
-    console.error("Could not load bookings:", error);
-
-    bookingTimeEl.innerHTML =
-      '<option disabled selected>Unable to load times</option>';
-
-    return;
-  }
-
-
-  // Create list of booked times
-  const bookedTimes = (data || []).map(
-    booking => String(booking.booking_time).substring(0, 5)
-  );
-
-
-  let available = false;
-
-
-  // Show only available times
-  timeSlots.forEach(time => {
-
-// ===============================
-// LOAD BOOKED TIMES FROM SUPABASE
-// ===============================
-
-async function loadTimeSlots() {
-
-  if (!bookingTimeEl) return;
-
-  bookingTimeEl.innerHTML = "";
-
-  const date = bookingDateEl?.value;
-
-  if (!date) {
-
-    bookingTimeEl.innerHTML =
-      '<option disabled selected>Select date first</option>';
-
-    return;
-  }
-
-
-  // Get all bookings for the selected date
-  const { data, error } = await supabaseClient
-    .from("bookings")
-    .select("booking_time")
-    .eq("booking_date", date);
-
-
-  // Database error
-  if (error) {
-
-    console.error("Could not load bookings:", error);
-
-    bookingTimeEl.innerHTML =
-      '<option disabled selected>Unable to load times</option>';
-
-    return;
-  }
-
-
-  // Create list of booked times
-  const bookedTimes = (data || []).map(
-    booking => String(booking.booking_time).substring(0, 5)
-  );
-
-
-  let available = false;
-
-
-  // Show only available times
-  timeSlots.forEach(time => {
-
-    if (!bookedTimes.includes(time)) {
-
-      const option = document.createElement("option");
-
-      option.value = time;
       option.textContent = time;
 
       bookingTimeEl.appendChild(option);
@@ -462,7 +351,7 @@ async function loadTimeSlots() {
   });
 
 
-  // No times available
+  // No available times
   if (!available) {
 
     bookingTimeEl.innerHTML =
@@ -473,51 +362,60 @@ async function loadTimeSlots() {
 }
 
 
-// Reload times whenever date changes
+// Reload available times
+// whenever the booking date changes
 bookingDateEl?.addEventListener(
   "change",
   loadTimeSlots
-);                                          }
-
+);
 
 
 // ===============================
 // ADD ENTRY
 // ===============================
 
-addBtn?.addEventListener("click", () => {
+addBtn?.addEventListener(
+  "click",
+  () => {
 
-  const price =
-    PRICING?.[categoryEl?.value]?.[serviceEl?.value] ?? 0;
-
-
-  entries.push({
-
-    category: categoryEl.value,
-
-    service: serviceEl.value,
-
-    price
-
-  });
+    const price =
+      PRICING?.[categoryEl?.value]?.[serviceEl?.value] ?? 0;
 
 
-  render();
+    entries.push({
 
-});
+      category:
+        categoryEl.value,
+
+      service:
+        serviceEl.value,
+
+      price
+
+    });
+
+
+    render();
+
+  }
+);
 
 
 // ===============================
 // REMOVE ENTRY
 // ===============================
 
-window.removeEntry = function(index) {
+window.removeEntry =
+  function(index) {
 
-  entries.splice(index, 1);
+    entries.splice(
+      index,
+      1
+    );
 
-  render();
+    render();
 
-};
+  };
 
 
 // ===============================
@@ -534,37 +432,46 @@ function render() {
   let total = 0;
 
 
-  entries.forEach((item, index) => {
+  entries.forEach(
+    (item, index) => {
 
-    total += item.price;
-
-
-    const li = document.createElement("li");
+      total += item.price;
 
 
-    li.innerHTML = `
-      <span>
-        ${item.category} • ${item.service} — R${item.price}
-      </span>
-
-      <button onclick="removeEntry(${index})">
-        X
-      </button>
-    `;
+      const li =
+        document.createElement("li");
 
 
-    listEl.appendChild(li);
+      li.innerHTML = `
+        <span>
+          ${item.category} • ${item.service} — R${item.price}
+        </span>
 
-  });
+        <button onclick="removeEntry(${index})">
+          X
+        </button>
+      `;
+
+
+      listEl.appendChild(li);
+
+    }
+  );
 
 
   if (totalEl) {
-    totalEl.textContent = "R" + total;
+
+    totalEl.textContent =
+      "R" + total;
+
   }
 
 
   if (countEl) {
-    countEl.textContent = entries.length;
+
+    countEl.textContent =
+      entries.length;
+
   }
 
 
@@ -581,184 +488,204 @@ function render() {
 // BOOKING
 // ===============================
 
-const barberNumber = "27671107595";
+const barberNumber =
+  "27671107595";
 
 
-bookBtn?.addEventListener("click", async () => {
+bookBtn?.addEventListener(
+  "click",
+  async () => {
 
-  const date = bookingDateEl?.value;
+    const date =
+      bookingDateEl?.value;
 
-  const time = bookingTimeEl?.value;
-
-
-  // ===============================
-  // BASIC VALIDATION
-  // ===============================
-
-  if (!date) {
-
-    return alert("Select a date first");
-
-  }
-
-
-  if (!time) {
-
-    return alert("Select a time");
-
-  }
-
-
-  if (entries.length === 0) {
-
-    return alert("Add a service");
-
-  }
-
-
-  // ===============================
-  // DISABLE BUTTON
-  // ===============================
-
-  bookBtn.disabled = true;
-
-  const originalButtonText =
-    bookBtn.textContent;
-
-  bookBtn.textContent =
-    "Checking availability...";
-
-
-  try {
+    const time =
+      bookingTimeEl?.value;
 
 
     // ===============================
-    // FINAL DATABASE CHECK
+    // BASIC VALIDATION
     // ===============================
 
-    const { data: existingBooking, error: checkError } =
-      await supabaseClient
-        .from("bookings")
-        .select("id")
-        .eq("booking_date", date)
-        .eq("booking_time", time)
-        .limit(1);
+    if (!date) {
 
-
-    if (checkError) {
-
-      console.error(
-        "Booking check failed:",
-        checkError
+      return alert(
+        "Select a date first"
       );
 
-      alert(
-        "We couldn't check that time. Please try again."
+    }
+
+
+    if (!time) {
+
+      return alert(
+        "Select a time"
       );
 
-      return;
+    }
+
+
+    if (entries.length === 0) {
+
+      return alert(
+        "Add a service"
+      );
 
     }
 
 
     // ===============================
-    // TIME ALREADY BOOKED
+    // DISABLE BUTTON
     // ===============================
 
-    if (
-      existingBooking &&
-      existingBooking.length > 0
-    ) {
-
-      alert(
-        "Sorry, that time has just been booked. Please choose another time."
-      );
+    bookBtn.disabled = true;
 
 
-      // Refresh available times
-      await loadTimeSlots();
-
-      return;
-
-    }
+    const originalButtonText =
+      bookBtn.textContent;
 
 
-    // ===============================
-    // CREATE BOOKING
-    // ===============================
-
-    const { error: insertError } =
-      await supabaseClient
-        .from("bookings")
-        .insert({
-
-          booking_date: date,
-
-          booking_time: time
-
-        });
+    bookBtn.textContent =
+      "Checking availability...";
 
 
-    // ===============================
-    // DATABASE REJECTED BOOKING
-    // ===============================
-
-    if (insertError) {
-
-      console.error(
-        "Booking insert failed:",
-        insertError
-      );
+    try {
 
 
-      // This specifically handles
-      // the UNIQUE date + time protection
+      // ===============================
+      // FINAL DATABASE CHECK
+      // ===============================
 
-      if (
-        insertError.code === "23505"
-      ) {
+      const {
+        data: existingBooking,
+        error: checkError
+      } =
+        await supabaseClient
+          .from("bookings")
+          .select("id")
+          .eq("booking_date", date)
+          .eq("booking_time", time)
+          .limit(1);
 
-        alert(
-          "Sorry, that time was just booked by someone else. Please choose another time."
+
+      if (checkError) {
+
+        console.error(
+          "Booking check failed:",
+          checkError
         );
 
-      } else {
-
         alert(
-          "We couldn't complete the booking. Please try again."
+          "We couldn't check that time. Please try again."
         );
+
+        return;
 
       }
 
 
-      await loadTimeSlots();
+      // ===============================
+      // TIME ALREADY BOOKED
+      // ===============================
 
-      return;
+      if (
+        existingBooking &&
+        existingBooking.length > 0
+      ) {
 
-    }
-
-
-    // ===============================
-    // BUILD WHATSAPP MESSAGE
-    // ===============================
-
-    const services =
-      entries
-        .map(
-          i => `${i.service} (R${i.price})`
-        )
-        .join(", ");
+        alert(
+          "Sorry, that time has just been booked. Please choose another time."
+        );
 
 
-    const total =
-      entries.reduce(
-        (sum, i) => sum + i.price,
-        0
-      );
+        // Refresh available times
+        await loadTimeSlots();
+
+        return;
+
+      }
 
 
-    const message =
-      encodeURIComponent(`
+      // ===============================
+      // CREATE BOOKING
+      // ===============================
+
+      const {
+        error: insertError
+      } =
+        await supabaseClient
+          .from("bookings")
+          .insert({
+
+            booking_date:
+              date,
+
+            booking_time:
+              time
+
+          });
+
+
+      // ===============================
+      // DATABASE REJECTED BOOKING
+      // ===============================
+
+      if (insertError) {
+
+        console.error(
+          "Booking insert failed:",
+          insertError
+        );
+
+
+        // Handles UNIQUE date + time protection
+        if (
+          insertError.code === "23505"
+        ) {
+
+          alert(
+            "Sorry, that time was just booked by someone else. Please choose another time."
+          );
+
+        } else {
+
+          alert(
+            "We couldn't complete the booking. Please try again."
+          );
+
+        }
+
+
+        await loadTimeSlots();
+
+        return;
+
+      }
+
+
+      // ===============================
+      // BUILD WHATSAPP MESSAGE
+      // ===============================
+
+      const services =
+        entries
+          .map(
+            i =>
+              `${i.service} (R${i.price})`
+          )
+          .join(", ");
+
+
+      const total =
+        entries.reduce(
+          (sum, i) =>
+            sum + i.price,
+          0
+        );
+
+
+      const message =
+        encodeURIComponent(`
 
 Hi Jeff Cuts, I would like to book an appointment.
 
@@ -770,48 +697,50 @@ Total: R${total}
 `);
 
 
-    // ===============================
-    // OPEN WHATSAPP
-    // ===============================
+      // ===============================
+      // OPEN WHATSAPP
+      // ===============================
 
-    window.open(
-      `https://wa.me/${barberNumber}?text=${message}`,
-      "_blank"
-    );
-
-
-    // ===============================
-    // CLEAR CUSTOMER CART
-    // ===============================
-
-    entries = [];
-
-    render();
+      window.open(
+        `https://wa.me/${barberNumber}?text=${message}`,
+        "_blank"
+      );
 
 
-    // Refresh available times
-    await loadTimeSlots();
+      // ===============================
+      // CLEAR CUSTOMER CART
+      // ===============================
+
+      entries = [];
+
+      render();
 
 
-    alert(
-      "Your appointment has been reserved successfully!"
-    );
+      // Refresh available times
+      await loadTimeSlots();
 
 
-  } finally {
+      alert(
+        "Your appointment has been reserved successfully!"
+      );
 
-    // ===============================
-    // RESTORE BUTTON
-    // ===============================
 
-    bookBtn.disabled = false;
+    } finally {
 
-    bookBtn.textContent =
-      originalButtonText;
+      // ===============================
+      // RESTORE BUTTON
+      // ===============================
+
+      bookBtn.disabled =
+        false;
+
+      bookBtn.textContent =
+        originalButtonText;
+
+    }
 
   }
-
-});
+);
 
 
 // ===============================
@@ -841,7 +770,9 @@ if (bookingTimeEl) {
 (() => {
 
   const jcBookingDateField =
-    document.getElementById("bookingDate");
+    document.getElementById(
+      "bookingDate"
+    );
 
 
   if (!jcBookingDateField) return;
@@ -856,7 +787,8 @@ if (bookingTimeEl) {
 
       const jcSelectedDate =
         new Date(
-          this.value + "T00:00:00"
+          this.value +
+          "T00:00:00"
         );
 
 
