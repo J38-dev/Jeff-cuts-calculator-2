@@ -2535,3 +2535,157 @@ body.gallery-viewer-active {
   }
 
    }
+
+
+
+/* =========================================================
+   GOOGLE REVIEW — PREMIUM ENHANCEMENT
+   ========================================================= */
+
+.review-container {
+  position: relative;
+
+  overflow: hidden;
+
+  border-color:
+    rgba(110, 219, 255, 0.16);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* Subtle blue glow */
+.review-container::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: -100px;
+  right: -80px;
+
+  background:
+    var(--blue);
+
+  border-radius: 50%;
+
+  filter: blur(80px);
+
+  opacity: 0.08;
+
+  pointer-events: none;
+}
+
+
+/* New small heading */
+.review-eyebrow {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: var(--blue);
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+
+/* Stars */
+.review-stars {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-bottom: 18px;
+
+  color: #fbbc04;
+
+  font-size: 13px;
+
+  filter:
+    drop-shadow(
+      0 0 6px
+      rgba(251, 188, 4, 0.18)
+    );
+}
+
+
+/* Override old title spacing */
+.review-title {
+  position: relative;
+
+  z-index: 2;
+
+  margin-bottom: 14px;
+}
+
+
+/* Review text */
+.review-text {
+  position: relative;
+
+  z-index: 2;
+
+  max-width: 350px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-bottom: 26px;
+}
+
+
+/* Google button */
+.google-review-button {
+  position: relative;
+
+  z-index: 2;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 12px 30px
+    rgba(0, 0, 0, 0.25);
+}
+
+
+/* Button shine */
+.google-review-button::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+
+  left: -100%;
+
+  width: 60%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+
+  transform: skewX(-20deg);
+
+  transition:
+    left 0.7s ease;
+}
+
+
+.google-review-button:hover::after {
+  left: 140%;
+   }
