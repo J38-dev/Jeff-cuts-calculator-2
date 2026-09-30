@@ -833,3 +833,165 @@ if (bookingTimeEl) {
   );
 
 })();
+
+
+
+
+
+
+      // ===============================
+// JEFF CUTS OPEN / CLOSED SYSTEM
+// ===============================
+
+const jcStatusText =
+  document.getElementById("jc-status-text");
+
+const jcStatusDot =
+  document.querySelector(".jc-status-dot");
+
+const jcOpenBtn =
+  document.getElementById("openBtn");
+
+const jcCloseBtn =
+  document.getElementById("closeBtn");
+
+const jcAdminPanel =
+  document.getElementById("adminPanel");
+
+
+// ===============================
+// LOAD SAVED STATUS
+// ===============================
+
+let jcShopStatus =
+  localStorage.getItem("jeffCutsStatus") || "open";
+
+
+// ===============================
+// UPDATE SHOP STATUS
+// ===============================
+
+function updateJeffCutsStatus() {
+
+  const isOpen =
+    jcShopStatus === "open";
+
+
+  // ===============================
+  // STATUS TEXT
+  // ===============================
+
+  if (jcStatusText) {
+
+    jcStatusText.textContent =
+      isOpen
+        ? "OPEN NOW"
+        : "CLOSED";
+
+  }
+
+
+  // ===============================
+  // STATUS DOT
+  // ===============================
+
+  if (jcStatusDot) {
+
+    jcStatusDot.classList.toggle(
+      "jc-status-closed",
+      !isOpen
+    );
+
+  }
+
+
+  // ===============================
+  // BOOKING BUTTON
+  // ===============================
+
+  if (bookBtn) {
+
+    bookBtn.disabled =
+      !isOpen;
+
+    if (!isOpen) {
+
+      bookBtn.textContent =
+        "BOOKING CLOSED";
+
+    } else {
+
+      bookBtn.textContent =
+        "Book Appointment";
+
+    }
+
+  }
+
+
+  // ===============================
+  // BOOKING FORM
+  // ===============================
+
+  const bookingForm =
+    document.querySelector(".booking-form");
+
+  if (bookingForm) {
+
+    bookingForm.classList.toggle(
+      "booking-closed",
+      !isOpen
+    );
+
+  }
+
+}
+
+
+// ===============================
+// OPEN BUTTON
+// ===============================
+
+jcOpenBtn?.addEventListener(
+  "click",
+  () => {
+
+    jcShopStatus = "open";
+
+    localStorage.setItem(
+      "jeffCutsStatus",
+      jcShopStatus
+    );
+
+    updateJeffCutsStatus();
+
+  }
+);
+
+
+// ===============================
+// CLOSED BUTTON
+// ===============================
+
+jcCloseBtn?.addEventListener(
+  "click",
+  () => {
+
+    jcShopStatus = "closed";
+
+    localStorage.setItem(
+      "jeffCutsStatus",
+      jcShopStatus
+    );
+
+    updateJeffCutsStatus();
+
+  }
+);
+
+
+// ===============================
+// INITIAL STATUS
+// ===============================
+
+updateJeffCutsStatus();
