@@ -422,41 +422,53 @@ window.removeEntry =
 // RENDER
 // ===============================
 
-function render() {
+  
+
+
+  function render() {
 
   if (!listEl) return;
-
 
   listEl.innerHTML = "";
 
   let total = 0;
 
+  entries.forEach((item, index) => {
 
-  entries.forEach(
-    (item, index) => {
+    total += item.price;
 
-      total += item.price;
+    const li = document.createElement("li");
 
+    li.innerHTML = `
+      <div class="cut-summary-info">
 
-      const li =
-        document.createElement("li");
-
-
-      li.innerHTML = `
-        <span>
-          ${item.category} • ${item.service} — R${item.price}
+        <span class="cut-summary-category">
+          ${item.category}
         </span>
 
-        <button onclick="removeEntry(${index})">
-          X
-        </button>
-      `;
+        <strong class="cut-summary-service">
+          ${item.service}
+        </strong>
 
+        <span class="cut-summary-price">
+          R${item.price}
+        </span>
 
-      listEl.appendChild(li);
+      </div>
 
-    }
-  );
+      <button
+        class="cut-remove-btn"
+        onclick="removeEntry(${index})"
+        aria-label="Remove ${item.service}"
+        title="Remove ${item.service}"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    `;
+
+    listEl.appendChild(li);
+
+  });
 
 
   if (totalEl) {
@@ -481,7 +493,7 @@ function render() {
     JSON.stringify(entries)
   );
 
-}
+                  }
 
 
 // ===============================
