@@ -2873,3 +2873,27 @@ input:focus-visible {
   }
 
 }
+
+/* =========================================================
+   REVIEW VISIBILITY SAFETY FIX
+   ========================================================= */
+
+#leave-review {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+#leave-review .review-container {
+  opacity: 1;
+  visibility: visible;
+}
+
+#leave-review .review-eyebrow,
+#leave-review .review-stars,
+#leave-review .review-title,
+#leave-review .review-text,
+#leave-review .google-review-button {
+  opacity: 1;
+  visibility: visible;
+}
