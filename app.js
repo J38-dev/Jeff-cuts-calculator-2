@@ -91,35 +91,53 @@ function updateLiveDateTime() {
   const now = new Date();
 
   // ===============================
-  // LIVE TIME
+  // JOHANNESBURG TIME
+  // ===============================
+
+  const johannesburgTime =
+    new Intl.DateTimeFormat("en-ZA", {
+      timeZone: "Africa/Johannesburg",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false
+    }).format(now);
+
+
+  // ===============================
+  // JOHANNESBURG DATE
+  // ===============================
+
+  const johannesburgDate =
+    new Intl.DateTimeFormat("en-ZA", {
+      timeZone: "Africa/Johannesburg",
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }).format(now);
+
+
+  // ===============================
+  // DISPLAY TIME
   // ===============================
 
   if (liveTimeEl) {
 
     liveTimeEl.textContent =
-      now.toLocaleTimeString("en-ZA", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-      });
+      johannesburgTime;
 
   }
 
 
   // ===============================
-  // LIVE DATE
+  // DISPLAY DATE
   // ===============================
 
   if (liveDateEl) {
 
     liveDateEl.textContent =
-      now.toLocaleDateString("en-ZA", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-      });
+      johannesburgDate;
 
   }
 
