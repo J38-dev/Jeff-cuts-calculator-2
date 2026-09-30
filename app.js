@@ -1013,3 +1013,353 @@ jcCloseBtn?.addEventListener(
 // ===============================
 
 updateJeffCutsStatus();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =========================================================
+// FULLSCREEN GALLERY VIEWER
+// =========================================================
+
+const galleryCards =
+  document.querySelectorAll(".gallery-card");
+
+const galleryViewer =
+  document.getElementById("galleryViewer");
+
+const galleryViewerImage =
+  document.getElementById("galleryViewerImage");
+
+const galleryClose =
+  document.getElementById("galleryClose");
+
+const galleryPrev =
+  document.getElementById("galleryPrev");
+
+const galleryNext =
+  document.getElementById("galleryNext");
+
+const galleryCounter =
+  document.getElementById("galleryViewerCounter");
+
+
+let galleryImages = [];
+
+let galleryCurrentIndex = 0;
+
+
+// =========================================================
+// COLLECT GALLERY IMAGES
+// =========================================================
+
+galleryCards.forEach(card => {
+
+  const image =
+    card.querySelector("img");
+
+  if (!image) return;
+
+  galleryImages.push({
+    src: image.src,
+    alt: image.alt || "Jeff Cuts latest cut"
+  });
+
+});
+
+
+// =========================================================
+// SHOW IMAGE
+// =========================================================
+
+function showGalleryImage(index) {
+
+  if (!galleryImages.length) return;
+
+
+  galleryCurrentIndex =
+    (index + galleryImages.length) %
+    galleryImages.length;
+
+
+  const currentImage =
+    galleryImages[galleryCurrentIndex];
+
+
+  if (galleryViewerImage) {
+
+    galleryViewerImage.src =
+      currentImage.src;
+
+    galleryViewerImage.alt =
+      currentImage.alt;
+
+  }
+
+
+  if (galleryCounter) {
+
+    galleryCounter.textContent =
+      `${galleryCurrentIndex + 1} / ${galleryImages.length}`;
+
+  }
+
+}
+
+
+// =========================================================
+// OPEN VIEWER
+// =========================================================
+
+function openGalleryViewer(index) {
+
+  if (!galleryViewer) return;
+
+  showGalleryImage(index);
+
+  galleryViewer.classList.add(
+    "gallery-viewer-open"
+  );
+
+  galleryViewer.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  document.body.classList.add(
+    "gallery-viewer-active"
+  );
+
+}
+
+
+// =========================================================
+// CLOSE VIEWER
+// =========================================================
+
+function closeGalleryViewer() {
+
+  if (!galleryViewer) return;
+
+  galleryViewer.classList.remove(
+    "gallery-viewer-open"
+  );
+
+  galleryViewer.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.classList.remove(
+    "gallery-viewer-active"
+  );
+
+}
+
+
+// =========================================================
+// GALLERY CARD CLICK
+// =========================================================
+
+galleryCards.forEach((card, index) => {
+
+  card.addEventListener(
+    "click",
+    () => {
+
+      openGalleryViewer(index);
+
+    }
+  );
+
+});
+
+
+// =========================================================
+// PREVIOUS IMAGE
+// =========================================================
+
+galleryPrev?.addEventListener(
+  "click",
+  event => {
+
+    event.stopPropagation();
+
+    showGalleryImage(
+      galleryCurrentIndex - 1
+    );
+
+  }
+);
+
+
+// =========================================================
+// NEXT IMAGE
+// =========================================================
+
+galleryNext?.addEventListener(
+  "click",
+  event => {
+
+    event.stopPropagation();
+
+    showGalleryImage(
+      galleryCurrentIndex + 1
+    );
+
+  }
+);
+
+
+// =========================================================
+// CLOSE BUTTON
+// =========================================================
+
+galleryClose?.addEventListener(
+  "click",
+  event => {
+
+    event.stopPropagation();
+
+    closeGalleryViewer();
+
+  }
+);
+
+
+// =========================================================
+// CLICK BACKGROUND TO CLOSE
+// =========================================================
+
+galleryViewer?.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target === galleryViewer ||
+      event.target ===
+      document.querySelector(
+        ".gallery-viewer-content"
+      )
+    ) {
+
+      closeGalleryViewer();
+
+    }
+
+  }
+);
+
+
+// =========================================================
+// KEYBOARD CONTROLS
+// =========================================================
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      !galleryViewer?.classList.contains(
+        "gallery-viewer-open"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    if (event.key === "Escape") {
+
+      closeGalleryViewer();
+
+    }
+
+
+    if (event.key === "ArrowLeft") {
+
+      showGalleryImage(
+        galleryCurrentIndex - 1
+      );
+
+    }
+
+
+    if (event.key === "ArrowRight") {
+
+      showGalleryImage(
+        galleryCurrentIndex + 1
+      );
+
+    }
+
+  }
+);
+
+
+// =========================================================
+// MOBILE SWIPE
+// =========================================================
+
+let galleryTouchStartX = 0;
+
+let galleryTouchEndX = 0;
+
+
+galleryViewer?.addEventListener(
+  "touchstart",
+  event => {
+
+    galleryTouchStartX =
+      event.changedTouches[0].screenX;
+
+  },
+  { passive: true }
+);
+
+
+galleryViewer?.addEventListener(
+  "touchend",
+  event => {
+
+    galleryTouchEndX =
+      event.changedTouches[0].screenX;
+
+
+    const distance =
+      galleryTouchEndX -
+      galleryTouchStartX;
+
+
+    if (Math.abs(distance) < 50) {
+      return;
+    }
+
+
+    if (distance > 0) {
+
+      showGalleryImage(
+        galleryCurrentIndex - 1
+      );
+
+    } else {
+
+      showGalleryImage(
+        galleryCurrentIndex + 1
+      );
+
+    }
+
+  },
+  { passive: true }
+);
