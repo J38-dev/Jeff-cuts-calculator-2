@@ -2689,3 +2689,123 @@ body.gallery-viewer-active {
 .google-review-button:hover::after {
   left: 140%;
    }
+
+
+
+
+
+
+
+/* =========================================================
+   TOUCH + ACCESSIBILITY IMPROVEMENTS
+   ========================================================= */
+
+/* Better touch behaviour */
+button,
+a,
+select,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* Prevent accidental text selection on controls */
+button,
+.hero-btn,
+.google-review-button,
+.floating-book-btn,
+.gallery-viewer-nav,
+.gallery-viewer-close {
+  -webkit-user-select: none;
+  user-select: none;
+
+  touch-action: manipulation;
+}
+
+
+/* Better keyboard focus */
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--blue);
+
+  outline-offset: 4px;
+}
+
+
+/* Make form controls easier to tap */
+.booking-form select,
+.booking-form input {
+  min-height: 48px;
+}
+
+
+/* Make booking buttons easier to tap */
+.booking-form button {
+  min-height: 48px;
+}
+
+
+/* Don't allow tiny gallery controls */
+.gallery-viewer-nav,
+.gallery-viewer-close {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+}
+
+
+/* =========================================================
+   BOOKING DATE / TIME TOUCH TARGETS
+   ========================================================= */
+
+#bookingDate,
+#bookingTime,
+#category,
+#service {
+  min-height: 50px;
+}
+
+
+/* Prevent awkward iOS zoom behaviour */
+@media (max-width: 600px) {
+
+  .booking-form input,
+  .booking-form select {
+    font-size: 16px;
+  }
+
+   }
+
+
+
+
+
+/* =========================================================
+   REMOVE CUT — TOUCH TARGET
+   ========================================================= */
+
+#list li .cut-remove-btn {
+  min-width: 44px;
+  min-height: 44px;
+
+  touch-action: manipulation;
+}
