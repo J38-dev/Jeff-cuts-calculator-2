@@ -2401,3 +2401,137 @@ body.gallery-viewer-active {
   }
 
    }
+
+
+/* =========================================================
+   FLOATING BOOK NOW BUTTON
+   ========================================================= */
+
+.floating-book-btn {
+  position: fixed;
+
+  right: 16px;
+  bottom: 18px;
+
+  z-index: 9000;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  min-height: 48px;
+
+  padding: 0 17px;
+
+  background:
+    rgba(110, 219, 255, 0.94);
+
+  color: var(--black);
+
+  border:
+    1px solid
+    var(--blue);
+
+  border-radius: var(--radius-pill);
+
+  box-shadow:
+    0 12px 35px
+    rgba(0, 0, 0, 0.45),
+    0 0 25px
+    var(--blue-20);
+
+  text-decoration: none;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.4px;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform:
+    translateY(15px)
+    scale(0.96);
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    transform 0.3s var(--ease),
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* Visible state */
+.floating-book-btn.floating-book-visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translateY(0)
+    scale(1);
+
+  pointer-events: auto;
+}
+
+
+/* Arrow */
+.floating-book-btn i {
+  font-size: 10px;
+
+  transition:
+    transform 0.25s var(--ease);
+}
+
+
+/* Hover */
+.floating-book-btn:hover {
+  background: var(--white);
+
+  border-color: var(--white);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.5);
+
+  transform:
+    translateY(-3px);
+}
+
+
+.floating-book-btn:hover i {
+  transform: translateX(3px);
+}
+
+
+/* Touch */
+.floating-book-btn:active {
+  transform: scale(0.94);
+}
+
+
+/* Mobile */
+@media (max-width: 600px) {
+
+  .floating-book-btn {
+    right: 12px;
+
+    bottom: 14px;
+
+    min-height: 46px;
+
+    padding: 0 15px;
+
+    font-size: 9px;
+  }
+
+   }
