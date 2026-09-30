@@ -2067,3 +2067,26 @@ label {
 #list li + li {
   margin-top: 9px;
 }
+
+
+/* =========================================================
+   JOHANNESBURG / ENNERDALE LOCATION
+   ========================================================= */
+
+.hero-location {
+  margin-top: 8px;
+
+  color: var(--blue);
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+  opacity: 0.9;
+   }
