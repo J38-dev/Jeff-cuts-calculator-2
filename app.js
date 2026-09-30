@@ -1363,3 +1363,88 @@ galleryViewer?.addEventListener(
   },
   { passive: true }
 );
+
+
+
+// =========================================================
+// FLOATING BOOK NOW BUTTON
+// =========================================================
+
+const floatingBookBtn =
+  document.getElementById("floatingBookBtn");
+
+const heroSection =
+  document.querySelector(".hero");
+
+const bookingSection =
+  document.getElementById("booking");
+
+
+// =========================================================
+// SHOW / HIDE FLOATING BUTTON
+// =========================================================
+
+function updateFloatingBookButton() {
+
+  if (!floatingBookBtn) return;
+
+
+  const scrollPosition =
+    window.scrollY;
+
+
+  // Show after leaving the hero
+  if (scrollPosition > window.innerHeight * 0.65) {
+
+    floatingBookBtn.classList.add(
+      "floating-book-visible"
+    );
+
+  } else {
+
+    floatingBookBtn.classList.remove(
+      "floating-book-visible"
+    );
+
+  }
+
+
+  // Hide when the booking form is visible
+  if (bookingSection) {
+
+    const bookingRect =
+      bookingSection.getBoundingClientRect();
+
+
+    if (
+      bookingRect.top <
+      window.innerHeight * 0.75
+    ) {
+
+      floatingBookBtn.classList.remove(
+        "floating-book-visible"
+      );
+
+    }
+
+  }
+
+}
+
+
+// =========================================================
+// SCROLL EVENT
+// =========================================================
+
+window.addEventListener(
+  "scroll",
+  updateFloatingBookButton,
+  { passive: true }
+);
+
+
+// =========================================================
+// INITIAL CHECK
+// =========================================================
+
+updateFloatingBookButton();
